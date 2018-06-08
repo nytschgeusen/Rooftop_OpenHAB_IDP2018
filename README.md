@@ -12,3 +12,7 @@ Repository for the openHAB group (EE Interdisciplinary project, summer semester 
 * First time setup of OpenHAB (Raspberry Pi) (https://www.openhab.org/docs/tutorial/1sttimesetup.html)
 
 * User forum of OpenHAB (https://community.openhab.org/)
+
+## Example for OpenHAB and PHILIPS Hue
+
+* Philips Hue Binding: https://docs.openhab.org/addons/bindings/hue/readme.html
