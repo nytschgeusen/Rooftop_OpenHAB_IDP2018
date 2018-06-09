@@ -18,5 +18,6 @@ Repository for the openHAB group (EE Interdisciplinary project, summer semester 
 * Philips Hue Binding: https://docs.openhab.org/addons/bindings/hue/readme.html
 ## How to set-up Hue Philips Lighting
 * https://www.howtogeek.com/247500/how-to-set-up-your-philips-hue-lights/
-## Video on how to configure Philips Hue with openHAB
+## Videos on how to configure Philips Hue with openHAB
 * https://www.youtube.com/watch?reload=9&v=Q4_LkXIRBWc
+* https://www.youtube.com/watch?v=ccHs4PhZuIk
