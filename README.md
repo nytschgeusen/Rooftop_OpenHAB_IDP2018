@@ -21,3 +21,6 @@ Repository for the openHAB group (EE Interdisciplinary project, summer semester 
 ## Videos on how to configure Philips Hue with openHAB
 * https://www.youtube.com/watch?reload=9&v=Q4_LkXIRBWc
 * https://www.youtube.com/watch?v=ccHs4PhZuIk
+
+## Adding Weather Module with openHAB Panel
+* Weather Binding (https://github.com/openhab/openhab1-addons/wiki/weather-binding)
