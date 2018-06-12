@@ -25,4 +25,4 @@ Repository for the openHAB group (EE Interdisciplinary project, summer semester 
 ## Adding Weather Module with openHAB Panel
 * Weather Binding (https://github.com/openhab/openhab1-addons/wiki/weather-binding)
 ## HABPanel for interface:
-* https://www.openhab.org/docs/configuration/habpanel.html#about-d
+* https://www.openhab.org/docs/configuration/habpanel.html#about-data-persistence
