@@ -1,17 +1,17 @@
 # Get yourself to the .conf directory in the terminal
 
-## 1.) go to the items directory
+## *.items file
+* go to the items directory
+$ cd items
 
-$ cd items ;
-
-/Create a new .items file in the items directory .
-$ touch *.items .
+* Create a new .items file in the items directory
+$ touch *.items
 
 
-## 2.) go to the sitemaps directory and create a new .sitemap file (watch out the extension is without ’s’)
+## go to the sitemaps directory and create a new .sitemap file (watch out the extension is without ’s’)
 
-$ cd .. .
-$ cd sitemaps .
+* $ cd .. .
+* $ cd sitemaps .
 $ touch *.sitemap ;
 
 
