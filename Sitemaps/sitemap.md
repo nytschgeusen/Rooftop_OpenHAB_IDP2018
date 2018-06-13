@@ -10,9 +10,9 @@ $ touch *.items
 
 ## go to the sitemaps directory and create a new .sitemap file (watch out the extension is without ’s’)
 
-* $ cd .. .
-* $ cd sitemaps .
-$ touch *.sitemap ;
+* $ cd .. //
+* $ cd sitemaps //
+$ touch *.sitemap //
 
 
 
