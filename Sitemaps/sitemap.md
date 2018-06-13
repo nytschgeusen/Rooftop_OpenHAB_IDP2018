@@ -4,7 +4,7 @@
 
 $ cd items
 
-Create a new .items file in the items directory
+/Create a new .items file in the items directory
 $ touch *.items
 
 
