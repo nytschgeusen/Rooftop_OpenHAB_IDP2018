@@ -1,0 +1,24 @@
+OpenHAB cloud secure remote access
+
+
+Master user:
+
+0.) Register account in the https://myopenhab.org
+
+1.) Add users by email and password ( each user has their own password)
+
+
+
+
+
+Regular user:
+
+0.) go to https://myopenhab.org and sign in with your email and password
+
+
+
+
+
+Mobile oenHAB app: Setting -> cancel Demo check box -> 	Local URL: 	http:server_ip:8080
+	Remote URL: 	https:myopenhab.org -> your password
+-> select the sitemap
