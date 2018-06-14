@@ -7,7 +7,7 @@ $ cd items
 * Create a new .items file in the items directory
 $ touch *.items
 
-* create different .item files for each room 
+* create different .item files for each room
 
 ## go to the sitemaps directory and create a new .sitemap file (watch out the extension is without ’s’)
 
@@ -35,3 +35,8 @@ $ touch *.sitemap //
 
 ex. Switch Presence_Mobile_John "Johns Mobile" <network> { channel="network:device:192_168_1_103:online" }
 ex. Switch Wallplug_FF_LR_TV "Wallplug TV" <poweroutlet> { channel="zwave:device:bb4d2b80:node30:switch_binary" }
+
+
+
+## 5.) Create your HABPanel widgets connection
+* you could edit the widget to coneect to the ItemDescription
