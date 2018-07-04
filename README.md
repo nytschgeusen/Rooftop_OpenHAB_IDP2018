@@ -27,6 +27,8 @@ Repository for the openHAB group (EE Interdisciplinary project, summer semester 
 ## HABPanel for interface:
 * https://www.openhab.org/docs/configuration/habpanel.html#about-data-persistence
 
-##Communication of openHAB with Ardunio
+## Communication of openHAB with Ardunio
 * http://www.instructables.com/id/OpenHab-Arduino/
-* Video : https://www.youtube.com/watch?v=Ky1jgSL-R1k
+* https://pubsubclient.knolleary.net/
+* If you communicate over Arduino, LAN and MQTT see Arduino Client for MQTT 102
+* You can also use Arduino and the Serial-Bindung or 1x ESP8266 (ESP-12x or NodeMCU) withe ESPEasy and WLAN
