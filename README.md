@@ -26,3 +26,7 @@ Repository for the openHAB group (EE Interdisciplinary project, summer semester 
 * Weather Binding (https://github.com/openhab/openhab1-addons/wiki/weather-binding)
 ## HABPanel for interface:
 * https://www.openhab.org/docs/configuration/habpanel.html#about-data-persistence
+
+##Communication of openHAB with Ardunio
+* http://www.instructables.com/id/OpenHab-Arduino/
+* Video : https://www.youtube.com/watch?v=Ky1jgSL-R1k
