@@ -1,0 +1,544 @@
+{
+    "dashboards": [],
+    "menucolumns": 4,
+    "settings": {
+        "theme": "default",
+        "panel_name": "Roof_demo",
+        "additional_stylesheet_url": "/rooftop/demo",
+        "background_image": "//source.unsplash.com/random",
+        "drawer_heading_image": "",
+        "show_header_clock": true
+    },
+    "customwidgets": {
+        "Hue Color Light Controller": {
+            "template": "<style>\n.icon-tile.colorize {\n  filter: invert(45%) sepia(100%) hue-rotate(15deg) saturate(1700%);\n-webkit-filter: invert(45%) sepia(100%) hue-rotate(15deg) saturate(1700%);\n}\n.hue-controller-table {\n  width: 100%;\n  border-collapse: separate; \n  border-spacing: 8px;\n  border: 2px solid #76899e; \n  border-radius: 10px;  \n} \n.hue-rounded-border {\n  border: 2px solid #76899e; \n  border-radius: 10px;  \n}\n#dimmer-slider .rz-bubble {\n  color: #FFAA00;\n}\n#dimmer-slider .rz-pointer {\n  background-color: #FFAA00;\n}\n#dimmer-slider .rzslider .rz-bar.rz-selection {\n  background-color: #FFAA00;\n}\n.caret#hue-controller-caret {\n  position: absolute;\n  left: 95%;\n  top: 45%;\n  color: white;  \n}\n.hue-select {\n  padding-right: 10px;\n}\n.action-button#single-button {\n  color: #FFAA00;\n  background-color: rgb(95,95,95);\n  border: 1px solid #76899e;\n  overflow: hidden;\n  width: 100%;\n  border-radius: 5px;\n  font-size: 18px;\n  font-weight: normal;\n}\nul.dropdown-menu#hue-controller-dropdown {\n  background-color: rgb(200,200,200);\n  text-align: center;\n  border: 0px;\n  border-radius: 5px;\n  width: 100%;\n} \nul.dropdown-menu#hue-controller-dropdown li {\n  color: #000;\n  border-collapse: separate;\n  padding: 5px;\n  border-radius: inherit;  \n} \n  \n</style>\n\n<!-- Defined scenes -->\n<div ng-init=\"sceneMap={\n              '81,56,100': 'Normal',\n              '5,91,78': 'Savanna Sunset',\n              '37,47,48': 'Tropical Twilight', \n              '225,99,53': 'Arctic Aurora', \n              '320,57,84': 'Spring Blossom', \n              '74,78,56': 'Relax', \n              '84,47,100': 'Read', \n              '181,21,100': 'Concentrate', \n              '187,98,100': 'Energize', \n              '82,55,100': 'Bright', \n              '82,55,30': 'Dimmed', \n              '82,55,0': 'Nightlight'\n             }\" />\n\n<table class=\"hue-controller-table\">\n  <tr>\n    <td ng-if=\"config.showTitle == true\" colspan=\"2\">\n      <h3 style=\"color: #ffaa00; line-height: .5em;\">{{config.title}}</h3>\n    </td>\n  </tr>\n  <tr>\n    <td width=\"20%\" class=\"hue-rounded-border\">\n      <table style=\"width: 100%;\">\n        <tr>\n          <td style=\"padding: 0px; padding-top: 10px; padding-bottom: 10px;\">\n            <div ng-init='onoff={\"name\": \"OnOff\", \"item\": config.light, \"hidelabel\": true, \"hideonoff\": true, \"iconset\": \"smarthome-set\",\"icon\": \"bulb\",\"icon_size\": \"36\" }'>\n              <widget-switch   ng-model=\"onoff\" />\n            </div>\n          </td>\n        </tr>\n      </table>\n    </td>\n    <td width=\"80%\" class=\"hue-rounded-border\">\n      <div class=\"slider-div\" ng-init='dimmerModel={\"name\": \"dimmer\", \"item\": config.dimmer, \n                          \"floor\" : 0, \"ceil\": 100, \"step\": 1,\n                          \"hidelabel\" : \"true\", \"hidelimits\": \"true\" }'>\n        <widget-slider ng-model=\"dimmerModel\" id=\"dimmer-slider\"/>\n      </div>\n    </td>\n  </tr>\n  <tr>\n    <td colspan=\"2\">\n      <table width=\"100%\">\n        <tr>\n          <td><div style=\"font-size: 15px; color: #FFAA00; font-weight: bold;\"><u>Scene</u></div></td>\n        </tr>\n        <tr>\n          <td>\n            <div style=\"width: 100%;\" class=\"btn-group\" uib-dropdown>\n              <button id=\"single-button\" type=\"button\" class=\"action-button\" uib-dropdown-toggle>\n                <span id=\"hue-select\">{{sceneMap[itemValue(config.light)]}}</span><span class=\"caret\" id=\"hue-controller-caret\"></span>\n                <span id=\"hue-select\" ng-if=\"sceneMap[itemValue(config.light)]== NULL\">UNKNOWN ({{itemValue(config.light)}})</span>\n              </button>\n              <ul class=\"dropdown-menu\" id=\"hue-controller-dropdown\" uib-dropdown-menu role=\"menu\" aria-labelledby=\"single-button\">\n                <li role=\"menuitem\" ng-repeat=\"(state, label) in sceneMap\">\n                  <a ng-click=\"sendCmd(config.light, state)\">{{label}}</a>\n                </li>                \n              </ul>\n            </div>\n          </td>\n        </tr>\n      </table>          \n    </td>\n  </tr>\n</table>\n\n",
+            "settings": [
+                {
+                    "type": "string",
+                    "id": "title",
+                    "label": "Title",
+                    "default": "Light",
+                    "description": "Title to display at top of widget"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "showTitle",
+                    "label": "Show Title",
+                    "default": true,
+                    "description": "Show or hide title"
+                },
+                {
+                    "type": "item",
+                    "id": "light",
+                    "label": "Light",
+                    "description": "Item for light"
+                },
+                {
+                    "type": "item",
+                    "id": "dimmer",
+                    "label": "Dimmer",
+                    "description": "Dimmer item for light"
+                }
+            ],
+            "name": "Hue Color Light Controller",
+            "author": "Tim Rogers",
+            "description": "Controller for Hue Color lights with scene selection",
+            "readme_url": "https://community.openhab.org/t/23304"
+        },
+        "meteogram": {
+            "template": "<div ng-init=\"meteogram_options=$eval(config|json);\n              meteogram_options.appType='pro';\n              meteogram_options.accountName='webapp';\n              meteogram_options.source='webapp';\n              meteogram_options.trigger='WEBAPP';\n              meteogram_options.checker='webapp-webapp-webapp';\n              meteogram_options.appLocaleUsed='getFromCountryCode';\n              meteogram_options.url=meteogram_options.url.replace(':','%3A').split('/').join('%2F');\n              meteogram_options.lineColor=meteogram_options.lineColor.replace('#','%23');\n              meteogram_options.gridLineColor=meteogram_options.gridLineColor.replace('#','%23');\n              meteogram_options.textColor=meteogram_options.textColor.replace('#','%23');\n              \">\n\t<!--{{meteogram_options | json}}-->\n  <img ng-src=\"https://nodeserver.cloud3squared.com/getMeteogram/{{meteogram_options | json}}\" />\n</div>",
+            "settings": [
+                {
+                    "type": "heading",
+                    "label": "LOCATION",
+                    "description": "Use https://meteograms.com and click your location then check the URL to get the coordinates"
+                },
+                {
+                    "type": "number",
+                    "id": "latitude",
+                    "label": "Latitude"
+                },
+                {
+                    "type": "number",
+                    "id": "longitude",
+                    "label": "Longitude"
+                },
+                {
+                    "type": "string",
+                    "id": "placeName",
+                    "label": "Place Name"
+                },
+                {
+                    "type": "string",
+                    "id": "countryCode",
+                    "label": "Country code",
+                    "description": "DE, FR, NL etc. Will be used to translate the labels in the country's language"
+                },
+                {
+                    "type": "number",
+                    "id": "hoursToDisplay",
+                    "label": "Hours to display"
+                },
+                {
+                    "type": "string",
+                    "id": "chartWidth",
+                    "label": "Width (px)"
+                },
+                {
+                    "type": "string",
+                    "id": "chartHeight",
+                    "label": "Height (px)"
+                },
+                {
+                    "type": "heading",
+                    "label": "METEOGRAM OPTIONS",
+                    "description": "More info: https://trello.com/c/dS5TWiZ0"
+                },
+                {
+                    "type": "heading",
+                    "label": "External settings file",
+                    "description": "Enter the URL of a file publicly accessible by the meteograms.com server to get options from. There is a settings showcase with ready-made JSON files at: https://trello.com/b/ST1CuBEm/meteogram-weather-charts"
+                },
+                {
+                    "type": "string",
+                    "id": "url",
+                    "label": "Settings URL"
+                },
+                {
+                    "type": "heading",
+                    "label": "Miscellaneous styling options"
+                },
+                {
+                    "type": "choice",
+                    "id": "legend",
+                    "choices": "none,right,below"
+                },
+                {
+                    "type": "string",
+                    "id": "fontSize",
+                    "description": "(doesn't seem to work)"
+                },
+                {
+                    "type": "choice",
+                    "id": "fontWeight",
+                    "choices": "normal,bold"
+                },
+                {
+                    "type": "choice",
+                    "id": "fontStyle",
+                    "choices": "normal,italic"
+                },
+                {
+                    "type": "string",
+                    "id": "lineColor",
+                    "description": "hex colour code #AARRGGBB where AA is Alpha (opacity)"
+                },
+                {
+                    "type": "string",
+                    "id": "gridLineColor",
+                    "description": "hex colour code #AARRGGBB where AA is Alpha (opacity)"
+                },
+                {
+                    "type": "string",
+                    "id": "textColor",
+                    "description": "hex colour code #AARRGGBB where AA is Alpha (opacity)"
+                },
+                {
+                    "id": "theme",
+                    "type": "choice",
+                    "choices": "default,semi-transparent,fully-transparent,dark-gradient,green-gradient,blue-gradient,gray-gradient,sand-background,skies-background"
+                },
+                {
+                    "type": "heading",
+                    "label": "Control of the min/max labels"
+                },
+                {
+                    "type": "choice",
+                    "id": "dataLabelsBoxes",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "dataLabelsPosition",
+                    "choices": "on,above,below,both,inside"
+                },
+                {
+                    "type": "choice",
+                    "id": "dataLabelsInteger",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "heading",
+                    "label": "Customise the time axis, including labels"
+                },
+                {
+                    "type": "choice",
+                    "id": "timeAxisLabels",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "timeAxisLabelsTop",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "timeAxisLabelsTopUseFormat",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "string",
+                    "id": "timeAxisLabelsTopFormat",
+                    "description": "see https://trello.com/c/41DKB0q9"
+                },
+                {
+                    "type": "choice",
+                    "id": "timeAxisLabelsFormat",
+                    "choices": "12 hrs,24 hrs"
+                },
+                {
+                    "type": "choice",
+                    "id": "timeAxisLabelsAmPm",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "timeAxisLabelsLeadingZero",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "timeAxisTickInterval",
+                    "choices": "auto,1 hr,2 hrs,3 hrs,4 hrs,6 hrs,12 hrs"
+                },
+                {
+                    "type": "choice",
+                    "id": "timeAxisScale",
+                    "choices": "linear,log,root,day,night,daynight"
+                },
+                {
+                    "type": "heading",
+                    "label": "Astronomical Info"
+                },
+                {
+                    "type": "choice",
+                    "id": "daylightBands",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "sunriseLines",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "sunriseLinesLabel",
+                    "choices": "none,arrow,time,timearrow"
+                },
+                {
+                    "type": "choice",
+                    "id": "sunriseLinesLabelAlign",
+                    "choices": "above,top,middle,below"
+                },
+                {
+                    "type": "choice",
+                    "id": "dataLabelsBoxes",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "heading",
+                    "label": "Various 'bar' type features"
+                },
+                {
+                    "type": "choice",
+                    "id": "weatherBar",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "indicesBar",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "airAndPollenBar",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "trendsBar",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "heading",
+                    "label": "Weather (etc.) parameters"
+                },
+                {
+                    "type": "choice",
+                    "id": "weatherSymbols",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "temperatureSeries",
+                    "choices": "actual,feels like,both,neither"
+                },
+                {
+                    "type": "choice",
+                    "id": "dewpoint",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "windSpeed",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "windSpeedGust",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "windArrows",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "windDirection",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "precipitationSeries",
+                    "choices": "expected,range,none"
+                },
+                {
+                    "type": "choice",
+                    "id": "precipitationSeriesType",
+                    "choices": "column,line"
+                },
+                {
+                    "type": "choice",
+                    "id": "precipitationSnow",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "precipitationProb",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "pressure",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "cloudiness",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "cloudLayers",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "clearness",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "humidity",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "visibility",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "ozone",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "uvi",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "waveHeight",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "waveDirection",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "wavePeriod",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "tide",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "heading",
+                    "label": "Options for displaying info in the header"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerLocation",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerTemperatureFL",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerPressure",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerHours",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerSunriseSet",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerSunriseSetType",
+                    "choices": "day,next"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerDaylightGain",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerMoonriseSet",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerMoonriseSetType",
+                    "choices": "day,next"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerMoonAzimuth",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerPrecipitation",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerPrecipitationProb",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerMoonPhase",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerAuroraProbability",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerWindSpeed",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerUpdateTime",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerModelUpdateTime",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerHumidity",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerProvider",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerElevation",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerElevationUnit",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "choice",
+                    "id": "headerSummary",
+                    "choices": "true,false"
+                },
+                {
+                    "type": "string",
+                    "id": "headerSeparator",
+                    "description": "default '|`"
+                },
+                {
+                    "type": "heading",
+                    "label": "Weather symbols"
+                },
+                {
+                    "type": "choice",
+                    "id": "weatherSymbolsSet",
+                    "choices": "default,classic-clear,classic-fill,classic-block,symbolic-black,symbolic-white,symbolic-color,sketch-black,sketch-color,golden-ratio-block,golden-ratio-clear,glassy,graphic,dripicons-black,dripicons-white,climacons-black,climacons-white,sunrise2sunset-black,sunrise2sunset-white,noaa,wunderground,openweathermap,yr-no-v5,yr-no-v6"
+                },
+                {
+                    "type": "heading",
+                    "label": "Customise the units preference"
+                },
+                {
+                    "type": "choice",
+                    "id": "temperatureUnit",
+                    "choices": "fahrenheit,celsius"
+                },
+                {
+                    "type": "choice",
+                    "id": "windSpeedUnit",
+                    "choices": "mph,km"
+                },
+                {
+                    "type": "string",
+                    "id": "token"
+                }
+            ],
+            "name": "Meteogram",
+            "author": "Yannick Schaus / meteograms.com",
+            "description": "Shows a meteogram from meteograms.com",
+            "readme_url": "https://community.openhab.org/t/39324"
+        }
+    }
+}

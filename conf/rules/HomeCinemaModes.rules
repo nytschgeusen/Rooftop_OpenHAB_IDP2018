@@ -1,0 +1,63 @@
+import java.util.Random
+/**
+ * This is a HomeCinema Modes rule which simulates a real dimmer 
+ */
+
+var Number percent = 0 
+var Number people = 0
+
+
+
+//Initail fake value for testing
+rule "Set random number of people for Occupancy sensor"
+when
+    System started
+then
+    people = 4
+    if (HomeCinema_Ocp2.state instanceof DecimalType) people = HomeCinema_Ocp2.state as DecimalType
+    HomeCinema_Ocp2.postUpdate(people)
+end
+
+
+//Setting Modes
+rule "HomeCinema ON Modes"
+when
+    Item HomeCinema_Ocp2 changed from HomeCinema_Ocp2.state = 0 to HomeCinema_Ocp2.state <= 10
+then
+    HomeCinema_Light.sendCommend(ON)
+    // Living Mode in HomeCinema
+    if ((HomeCinema_modestring.state == "Living") || (HomeCinema_modeimage == "TV") || (HomeCinema_Screen.state == ON))  {
+        percent = 50
+        if (HomeCinema_Light.state instanceof DecimalType) percent = HomeCinema_Light.state as DecimalType
+        postUpdate(HomeCinema_Light, percent)
+    } 
+
+    // Sleeping Mode in HomeCinema
+    if ((HomeCinema_modestring.state == "Sleep") || (HomeCinema_modeimage == "Bed")) {
+       HomeCinema_Light.sendCommend(OFF)
+    } 
+
+    // Manual Mode in HomeCinema
+    else if HomeCinema_Light received command {
+        if ((receivedCommand == INCREASE) || (receivedCommand == DECREASE)) {
+            percent = 0
+            if (HomeCinema_Light.state instanceof DecimalType) percent = HomeCinema_Light.state as DecimalType
+
+            if (receivedCommand == INCREASE) percent = percent + 5
+            if (receivedCommand == DECREASE) percent = percent - 5
+
+            if (percent < 0)   percent = 0
+            if (percent > 100) percent = 100
+            postUpdate(HomeCinema_Light, percent)
+        }
+    }
+
+end
+
+
+rule "HomeCinema OFF Modes"
+when 
+    Item HomeCinema_Ocp2 changed to HomeCinema_Ocp2.state = 0 
+then
+    HomeCinema_Light.sendCommend(OFF)
+end

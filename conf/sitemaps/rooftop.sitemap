@@ -1,0 +1,98 @@
+sitemap rooftop label="Rooftop" {
+    Frame {
+        Group item=Bathroom
+        Group item=Kitchen
+        Group item=Studio
+        Group item=Corridor
+        Group item=Entryway
+        Group item=Boiler
+        Group item=HomeCinema
+        Group item=Terrace
+        Group item=Occupany_sensor
+    }
+
+    Frame {
+        Slider label="Light" icon="light" {
+            Default item=Bathroom_Light label="Bathroom"
+            Default item=Kitchen_Light label="Kitchen"
+            Default item=Studio_Light label="Studio"
+            Default item=Corridor_Light label="Corridor"
+            Default item=Entryway_Light label="Entryway"
+            Default item=HomeCinema_Light label="Home Cinema"
+            Default item=Terrace_Light label="Terrace"
+        }
+
+        Text label="Door" icon="door" {
+            Default item=Bathroom_Door label="Bathroom"
+            Default item=Studio_Door label="Studio"
+            Default item=Corridor_Door label="Corridor"
+            Default item=Entryway_Door label="Entryway"
+            Default item=HomeCinema_Door label="Home Cinema"
+        }
+
+        Setpoint label="Motion Sensor" icon="motion" {
+            Default item=Bathroom_Motion    label="Bathroom"
+            Default item=Studio_Ocp1        label="Studio"
+            Default item=Corridor_Motion    label="Corridor"
+            Default item=Entryway_Motion    label="Entryway"
+            Default item=HomeCinema_Ocp2    label="Home Cinema"
+            Default item=Terrace_Motion     label="Terrace"
+        }
+
+        Switch label="Power Outlet" icon="poweroutlet" {
+            Default item=Bathroom_Power label="Bathroom"
+            Default item=Studio_Power label="Studio"
+            Default item=HomeCinema_Power label="Home Cinema"
+        }
+
+        Text label="Humidity" icon="humidity" {
+            Default item=Bathroom_Humidity label="Bathroom"
+        }
+
+        Slider label="Window" icon="window" {
+            Default item=Kitchen_Window label="Kitchen"
+            Default item=Studio_Window label="Studio"
+            Default item=Corridor_Window label="Corridor"
+        }
+
+        Slider label="Roller Shutter" icon="rollershutter" {
+            Default item=Kitchen_Shutter label="Kitchen"
+            Default item=Studio_Shutter label="Studio"
+            Default item=Corridor_Shutter label="Corridor"
+        }
+
+        Setpoint label="Fan" icon="fan_ceiling" {
+            Default item=Kitchen_Fan label="Kitchen"
+        }
+
+        Setpoint label="Air Conditioner" icon="snow" {
+            Default item=Kitchen_AirCon label="Kitchen"
+            Default item=Studio_AirCon label="Studio"
+            Default item=HomeCinema_AirCon label="Home Cinema"
+        }
+
+        Setpoint label="Heating" icon="heating" {
+            Default item=Kitchen_Heating label="Kitchen"
+            Default item=Boiler_Heating label="Boiler Room"
+        }
+
+        Text label="String" icon="text" {
+            Default item=Studio_modestring         label="Studio"
+            Default item=HomeCinema_modestring     label="Home Cinema"
+        }
+
+        Image label="image" icon="text" {
+            Default item=Studio_modeimage          label="Studio"
+            Default item=HomeCinema_modeimage     label="Home Cinema"
+        }
+
+        Switch label="Projector" icon="projector" {
+            Default item=Studio_Projector   label="Studio"
+        }
+
+        Switch label="Screen" icon="screen" {
+            Default item=HomeCinema_Screen   label="Home Cinema"
+        }
+
+    }
+}
