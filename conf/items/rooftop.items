@@ -1,64 +1,113 @@
-Group           Home                "Rooftop_1"         <house>
+Group           Home                "Home"              <house>
 
-Group           Bathroom            "Bathroom"          <bath>            (Home)
-Group           Kitchen             "Kitchen"           <kitchen>         (Home)
-Group           Studio              "Studio"            <pantry>          (Home)
-Group           Corridor            "Corridor"          <corridor>        (Home)
-Group           Entryway            "Entryway"          <frontdoor>       (Home)
-Group           Boiler              "Boiler Room"       <gas>             (Home)
-Group           HomeCinema          "Home Cinema"       <screen>          (Home)
-Group           Terrace             "Terrace"           <terrace>         (Home)
-Group           Occupany_sensor     "Occupancy Sensor"  <motion>          (Home)  
-
-Switch          Bathroom_Light      "Light"             <light>           (Bathroom, gLight)      ["Lighting"]     {channel=""}
-Contact         Bathroom_Door       "Door"              <door>            (Bathroom, gDoor)                        {channel=""}
-Switch          Bathroom_Motion     "Motion Sensor"     <motion>          (Bathroom, gMotion)                      {channel=""}
-Switch          Bathroom_Power      "Power Outlet"      <poweroutlet>     (Bathroom, gPower)      ["Switchable"]   {channel=""}
-Number          Bathroom_Humidity   "Humidity"          <humidity>        (Bathroom, gHumidity)                    {channel=""}
-Switch          Kitchen_Light       "Light"             <light>           (Kitchen, gLight)       ["Lighting"]     {channel=""}
-Contact         Kitchen_Window      "Window"            <window>          (Kitchen, gWindow)                       {channel=""}
-Rollershutter   Kitchen_Shutter     "Roller Shutter"    <rollershutter>   (Kitchen, gShutter)                      {channel=""}
-Switch          Kitchen_Fan         "Fan"               <fan_ceiling>     (Kitchen, gFan)         ["Switchable"]   {channel=""}
-Switch          Kitchen_AirCon      "Air Conditioner"   <snow>            (Kitchen, gAirCon)      ["Switchable"]   {channel=""}
-Number          Kitchen_Heating     "Heating"           <heating>         (Kitchen, gHeating)                      {channel=""}
-Dimmer          Studio_Light        "Light"             <light>           (Studio, gLight)        ["Lighting"]     {channel=""}
-Contact         Studio_Window       "Window"            <window>          (Studio, gWindow)                        {channel=""}
-Contact         Studio_Door         "Door"              <door>            (Studio, gDoor)                          {channel=""}
-Number          Studio_Ocp1         "Occupancy Sensor"  <motion>          (Studio,Occupancy_sensor,gMotion)        {channel=""}
-Switch          Studio_Power        "Power Outlet"      <poweroutlet>     (Studio, gPower)        ["Switchable"]   {channel=""}
-Rollershutter   Studio_Shutter      "Roller Shutter"    <rollershutter>   (Studio, gShutter)                       {channel=""}
-Switch          Studio_AirCon       "Air Conditioner"   <snow>            (Studio, gAirCon)       ["Switchable"]   {channel=""}
-Switch          Corridor_Light      "Light"             <light>           (Corridor, gLight)      ["Lighting"]     {channel=""}
-Contact         Corridor_Door       "Door"              <door>            (Corridor, gDoor)                        {channel=""}
-Switch          Corridor_Motion     "Motion Sensor"     <motion>          (Corridor, gMotion)                      {channel=""}
-Contact         Corridor_Window     "Window"            <window>          (Corridor, gWindow)                      {channel=""}
-Rollershutter   Corridor_Shutter    "Roller Shutter"    <rollershutter>   (Corridor, gShutter)                     {channel=""}
-Switch          Entryway_Light      "Light"             <light>           (Entryway, gLight)      ["Lighting"]     {channel=""}
-Contact         Entryway_Door       "Door"              <door>            (Entryway, gDoor)                        {channel=""}
-Switch          Entryway_Motion     "Motion Sensor"     <motion>          (Entryway, gMotion)                      {channel=""}
-Number          Boiler_Heating      "Heating"           <heating>         (Boiler, gHeating)                       {channel=""}
-Dimmer          HomeCinema_Light    "Light"             <light>           (HomeCinema, gLight)    ["Lighting"]     {channel=""}
-Contact         HomeCinema_Door     "Door"              <door>            (HomeCinema, gDoor)                      {channel=""}
-Number          HomeCinema_Ocp2     "Occupancy Sensor"  <motion>          (HomeCinema,Occupancy_sensor,gMotion)    {channel=""}
-Switch          HomeCinema_Power    "Power Outlet"      <poweroutlet>     (HomeCinema, gPower)    ["Switchable"]   {channel=""}
-Switch          HomeCinema_AirCon   "Air Conditioner"   <snow>            (HomeCinema, gAirCon)   ["Switchable"]   {channel=""}
-Switch          Terrace_Light       "Light"             <light>           (Terrace, gLight)       ["Lighting"]     {channel=""}
-Switch          Terrace_Motion      "Motion Sensor"     <motion>          (Terrace, gMotion)                       {channel=""}
-String          Studio_modestring   "Studio_modes"      <text>            (Studio)                                 {channel=""}
-Image           Studio_modeimage    "Studio_modes"                        (Studio)                                 {channel=""}
-Switch          Studio_Projector    "Studio_Projector"  <projector>       (Studio,gPower)         ["Switchable"]   {channel=""}
-String          HomeCinema_modestring  "HomeCinema_modes"  <text>         (HomeCinema)                             {channel=""}
-Image           HomeCinema_modeimage   "HomeCinema_modes"                 (HomeCinema)                             {channel=""}
-Switch          HomeCinema_Screen   "HomeCinema_Screen"  <screen>         (HomeCinema,gPower)     ["Switchable"]   {channel=""}
+/* Areas */
+Group           gRF                 "Rooftop"           <attic>            (Home)
+Group           gFF                 "First Floor"       <firstfloor>       (Home) 
+Group           gGF                 "Ground Floor"      <groundfloor>      (Home)
+Group           gC                  "Cellar"            <cellar>           (Home)
+Group           gBathroom            "Bathroom"          <bath>            (Home)
+Group           gKitchen             "Kitchen"           <kitchen>         (Home)
+Group           gStudio              "Studio"            <pantry>          (Home)
+Group           gCorridor            "Corridor"          <corridor>        (Home)
+Group           gEntryway            "Entryway"          <frontdoor>       (Home)
+Group           gBoiler              "Boiler Room"       <gas>             (Home)
+Group           gHomeCinema          "Home Cinema"       <screen>          (Home)
+Group           gTerrace             "Terrace"           <terrace>         (Home) 
+Group           Weather              "Weather"           <sun>
 
 
-Group:Switch:OR(ON, OFF)           gLight      "Light"             <light>           (Home)
-Group:Contact:OR(OPEN, CLOSED)     gDoor       "Door"              <door>            (Home)
-Group:Switch:OR(ON, OFF)           gMotion     "Motion Sensor"     <motion>          (Home)
-Group:Switch:OR(ON, OFF)           gPower      "Power Outlet"      <poweroutlet>     (Home)
-Group:Number:AVG                   gHumidity   "Humidity"          <humidity>        (Home)
-Group:Contact:OR(OPEN, CLOSED)     gWindow     "Window"            <window>          (Home)
-Group:Rollershutter:OR(UP, DOWN)   gShutter    "Roller Shutter"    <rollershutter>   (Home)
-Group:Switch:OR(ON, OFF)           gFan        "Fan"               <fan_ceiling>     (Home)
-Group:Switch:OR(ON, OFF)           gAirCon     "Air Conditioner"   <snow>            (Home)
-Group:Number:AVG                   gHeating    "Heating"           <heating>         (Home)
+/* Rooms */
+Switch          Bathroom_Light      "Bath_Light"             <light>           (gRF,gBathroom,gLight)      ["Lighting"]     
+Contact         Bathroom_Door       "Bath_Door"              <door>            (gRF,gBathroom,gDoor)                        
+Switch          Bathroom_Power      "Bath_Power Outlet"      <poweroutlet>     (gRF,gBathroom,gPower)      ["Switchable"]  
+Number          Bathroom_Humidity   "Bath_Humidity"          <humidity>        (gRF,gBathroom,gHumidity)                    
+Switch          Kitchen_Light       "Kit_Light"             <light>           (gRF,gKitchen,gLight)       ["Lighting"]     
+Contact         Kitchen_Window      "Kit_Window"            <window>          (gRF,gKitchen,gWindow)                       
+Rollershutter   Kitchen_Shutter     "Kit_Roller Shutter"    <rollershutter>   (gRF,gKitchen)                      
+Switch          Kitchen_Fan         "Kit_Fan"               <fan_ceiling>     (gRF,gKitchen,gFan)         ["Switchable"]  
+Switch          Kitchen_AirCon      "Kit_Air Conditioner"   <snow>            (gRF,gKitchen,gAirCon)      ["Switchable"]   
+Number          Kitchen_Heating     "Kit_Heating"           <heating>         (gRF,gKitchen,gHeating)                      
+Switch          Corridor_Light      "Cor_Light"             <light>           (gRF,gCorridor,gLight)      ["Lighting"]     
+Contact         Corridor_Door       "Cor_Door"              <door>            (gRF,gCorridor,gDoor)                        
+Contact         Corridor_Window     "Cor_Window"            <window>          (gRF,gCorridor,gWindow)                      
+Rollershutter   Corridor_Shutter    "Cor_Roller Shutter"    <rollershutter>   (gRF,gCorridor)                     
+Switch          Entryway_Light      "Ent_Light"             <light>           (gRF,gEntryway,gLight)      ["Lighting"]     
+Contact         Entryway_Door       "Ent_Door"              <door>            (gRF,gEntryway,gDoor)                        
+Number          Boiler_Heating      "Boiler_Heating"           <heating>         (gRF,gBoiler,gHeating)                      
+Switch          Terrace_Light       "Ter_Light"             <light>           (gRF,gTerrace,gLight)       ["Lighting"]     
+
+
+/* Studio */
+Number          Studio_mode           "Stu_modes"      <office>         (gRF,gStudio)                                 
+Dimmer          Studio_Light_1          "Stu_Light_1 [%.1f %%]"             <light>           (gRF,gStudio,gLight_Stu)            
+Dimmer          Studio_Light_2          "Stu_Light_2 [%.1f %%]"             <light>           (gRF,gStudio,gLight_Stu)            
+Dimmer          Studio_Light_3          "Stu_Light_3 [%.1f %%]"             <light>           (gRF,gStudio,gLight_Stu)            
+Number          Studio_Ocp           "Stu_Ocp"         <motion>          (gRF,gStudio,gOccupancy)        
+Number          Studio_Illu          "Stu_Illu"        <smiley>            (gRF,gStudio,gIlluminator)      
+Switch          Studio_Projector      "Stu_Projector"  <projector>       (gRF,gStudio)         ["Switchable"]   
+Dimmer          Studio_solarpanel_1      "Stu_solarpanel_1 [%.1f %%]"    <solarplant>   (gRF,gStudio,gSolarShutter)                       
+Dimmer          Studio_solarpanel_2      "Stu_solarpanel_2 [%.1f %%]"    <solarplant>   (gRF,gStudio,gSolarShutter)                       
+Dimmer          Studio_solarpanel_3      "Stu_solarpanel_3 [%.1f %%]"    <solarplant>   (gRF,gStudio,gSolarShutter)                       
+Contact         Studio_Door         "Stu_Door"              <door>            (gRF,gStudio,gDoor)                         
+Switch          Studio_Heatpump       "Stu_Heatpump"   <heating>            (gRF,gStudio,gHeatpump)       ["Switchable"]  
+Contact         Studio_Window       "Stu_Window"            <window>          (gRF,gStudio,gWindow)                        
+Switch          Studio_Power        "Stu_Power Outlet"      <poweroutlet>     (gRF,gStudio,gPower)        ["Switchable"]   
+
+
+/* HomeCinema */
+Number          HomeCinema_mode       "Cin_modes"    <cinemascreen>         (gRF,gHomeCinema)                             
+Dimmer          HomeCinema_Light    "Cin_Light [%.1f %%]"             <light>           (gRF,gHomeCinema,gLight_Cin)    ["Lighting"]    
+Number          HomeCinema_Ocp     "Cin_Ocp"  <motion>          (gRF,gHomeCinema,gOccupancy)    
+Number          HomeCinema_Illu    "Cin_Illu"        <smiley>            (gRF,gHomeCinema,gIlluminator)      
+Switch          HomeCinema_Screen     "Cin_Screen"   <screen>         (gRF,gHomeCinema)     ["Switchable"]   
+Contact         HomeCinema_Door     "Cin_Door"              <door>            (gRF,gHomeCinema,gDoor)                      
+Switch          HomeCinema_Power    "Cin_Power Outlet"      <poweroutlet>     (gRF,gHomeCinema,gPower)    ["Switchable"]   
+Switch          HomeCinema_Heatpump   "Cin_Heatpump"   <heating>            (gRF,gHomeCinema,gHeatpump)   ["Switchable"]   
+
+
+/* Weather */
+Group Weather_Chart
+Number Weather_Temperature      "Outside Temperature [%.1f °C]" <temperature> (Weather, Weather_Chart)     { channel="yahooweather:weather:berlin:temperature" }
+Number Weather_Temp_Max         "Todays Maximum [%.1f °C]"      <temperature> (Weather, Weather_Chart)
+Number Weather_Temp_Min         "Todays Minimum [%.1f °C]"      <temperature> (Weather, Weather_Chart)
+Number Weather_Chart_Period     "Chart Period"
+DateTime Weather_LastUpdate     "Last Update number [%1$ta %1$tR]"     <clock> 
+Number Sun_Elevation            "Sun Elevation"                 <sun>       { channel = "astro:sun:home:position#elevation" }
+Number Sun_Azimuth              "Sun Azimuth"                   <sun>       { channel = "astro:sun:home:position#azimuth" }
+Number Sun_DiffuseRad              "Sun Diffuse Rad [%.2f W/m**2]"               <sun>       { channel = "astro:sun:home:radiation#diffuse" }
+Number Sun_DirectRad               "Sun Direct Rad [%.2f W/m**2]"                <sun>       { channel = "astro:sun:home:radiation#direct" }
+Number Sun_TotalRad                "Sun Total Rad [%.2f W/m**2]"                <sun>       { channel = "astro:sun:home:radiation#total" }
+DateTime Day_Start           "Day Start [%1$tH:%1$tM]"         <sunrise>   { channel = "astro:sun:home:daylight#start" }
+DateTime Day_End             "Day End [%1$tH:%1$tM]"          <sunset>    { channel = "astro:sun:home:daylight#end" }
+Number Moon_Elevation           "Moon Elevation"                <moon>      { channel = "astro:moon:home:position#elevation" }
+Number Moon_Azimuth             "Moon Azimuth"                  <moon>      { channel = "astro:moon:home:position#azimuth" }
+String Moon_Phase               "Moon Phase"                    <moon>      { channel = "astro:moon:home:phase#name" }
+
+
+/* Group of utilities */
+Group:Switch:OR(ON, OFF)           gLight_Stu      "Studio Light [(%d)]"             <light>           (gStudio)
+Group:Switch:OR(ON, OFF)           gLight_Cin      "HomeCinema Light [(%d)]"             <light>       (gHomeCinema)
+Group:Contact:OR(OPEN, CLOSED)     gDoor       "Door [(%d)]"              <door>            (Home)
+Group:Switch:OR(ON, OFF)           gPower      "Power Outlet [(%d)]"      <poweroutlet>     (Home)
+Group:Number:AVG                   gHumidity   "Humidity ([%d %%])"          <humidity>        (Home)
+Group:Contact:OR(OPEN, CLOSED)     gWindow     "Window [(%d)]"            <window>          (Home)
+Group:Number:SUM                   gSolarShutter    "Solar Roller Shutter [(%d)]"    <solarplant>   (Home)
+Group:Switch:OR(ON, OFF)           gFan        "Fan [(%d)]"               <fan_ceiling>     (Home)
+Group:Switch:OR(ON, OFF)           gHeatpump     "Heat Pump [(%d)]"       <heating>            (Home)
+Group:Number:AVG                   gHeating    "Boiler [(%d)]"           <heating>         (Home)
+Group:Number:SUM                   gOccupancy  "Occupancy Sensor [(%d)]"  <motion>          (Home)
+Group:Number:SUM                   gIlluminator  "Illumination Sensor [(%d)]"  <smiley>          (Home)
+
+
+/* Dummy */
+Number Studio_Ocp_test     "People [%d person]"                <parents_1_1>       (gRF,gStudio,gOccupancy)    
+Number Studio_Illu_test     "Stu_Illu_test [%.1f lm]"   <niveau>            (gRF,gStudio,gIlluminator)           
+Number HomeCinema_Ocp_test  "Cin_Ocp_test [%d person]"         <parents_1_1>       (gRF,gHomeCinema,gOccupancy)
+Number HomeCinema_Illu_test "Cin_Illu_test [%.1f lm]"   <niveau>            (gRF,gHomeCinema,gIlluminator)
+Number Temperature_Setpoint     "Set_Temp. [%.1f °C]" <temperature>    (gHeatpump)    ["TargetTemperature"]
+Number Sun_TotalRad_test     "Sun_TotalRad_test [%.1f W/m^2]"   <sun>            (Home)           
+Number Regulate_Illu    "Regulate_Illu [%d lm]"     <attic>           (Home)
+
+
+
+// vim: syntax=Xtend

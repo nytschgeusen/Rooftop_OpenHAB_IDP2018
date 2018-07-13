@@ -1,4 +1,5 @@
-sitemap rooftop label="Rooftop" {
+sitemap rooftop label="demo_rooftop" 
+{
     Frame {
         Group item=Bathroom
         Group item=Kitchen
@@ -96,3 +97,5 @@ sitemap rooftop label="Rooftop" {
 
     }
 }
+
+// vim: syntax=Xtend

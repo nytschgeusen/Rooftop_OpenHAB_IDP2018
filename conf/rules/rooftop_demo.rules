@@ -1,0 +1,114 @@
+import java.util.Random
+
+var Timer timer = null
+val resList = newArrayList("640/480", "320/240", "480/360")
+val urlList = newArrayList("https://www.fillmurray.com", "https://www.fillmurray.com/g",
+                 "https://www.placecage.com", "https://www.placecage.com/c", "https://www.placecage.com/g")
+val Random random = new Random()
+
+/**
+ * This is a demo rule which simulates a real dimmer
+ * and posting an updated state on the rooftop
+ */
+
+//Initail fake value for testing
+rule "Initialize light states"
+when
+    System started
+then
+    Studio_Ocp_test.postUpdate(0)
+    Studio_Illu_test.postUpdate(0)
+    HomeCinema_Ocp_test.postUpdate(0)
+    HomeCinema_Illu_test.postUpdate(0)
+    Temperature_Setpoint.postUpdate(21.2)
+    Sun_TotalRad_test.postUpdate(0)
+    Studio_mode.postUpdate(0)
+    Regulate_Illu.postUpdate(0)
+    gLight_Stu.members.forEach(light| postUpdate(light, OFF))
+    gLight_Cin.members.forEach(light| postUpdate(light, OFF))
+    gSolarShutter.members.forEach(solar| postUpdate(solar, 0))
+end
+
+
+rule "Sun Radiation and the solar panel"
+when
+    Item Sun_TotalRad_test received update or
+    Item Studio_Ocp_test received update or 
+    System started
+then
+    if (Studio_Ocp_test.state >= 1) {
+        if ((Sun_TotalRad_test.state >= 250.0) && (Sun_TotalRad_test.state < 500.0)) {
+            gSolarShutter.members.forEach(item| postUpdate(item, 50))
+        } else if ((Sun_TotalRad_test.state >= 500.0) && (Sun_TotalRad_test.state < 1000.0)) {
+            gSolarShutter.members.forEach(item| postUpdate(item, 75))
+        } else if (Sun_TotalRad_test.state >= 1000.0) {
+            gSolarShutter.members.forEach(item| postUpdate(item, 100))
+        } else {
+            gSolarShutter.members.forEach(item| postUpdate(item, 0))
+        } 
+    } else if (Studio_Ocp_test.state == 0) {
+        gSolarShutter.members.forEach(item| postUpdate(item, 0))
+    }
+end
+
+
+rule "Studio_Light and Illumination"
+when 
+    Item Studio_Illu_test received update or
+    Item Studio_Ocp_test received update or
+    System started
+then
+    if (Studio_Ocp_test.state >= 1) {
+        if (Studio_Illu_test.state == 0) {
+            gLight_Stu.members.forEach(light| postUpdate(light,100))
+        } else if ((Studio_Illu_test.state <= 100) && (Studio_Illu_test.state > 0)) {
+            gLight_Stu.members.forEach(light| postUpdate(light,75))
+        } else if ((Studio_Illu_test.state <= 200) && (Studio_Illu_test.state > 100)) {
+            gLight_Stu.members.forEach(light| postUpdate(light,50))
+        } else if ((Studio_Illu_test.state <= 300) && (Studio_Illu_test.state > 200)) {
+            gLight_Stu.members.forEach(light| postUpdate(light,25))
+        } else {
+            gLight_Stu.members.forEach(light| postUpdate(light,0))
+        }
+    } else if (Studio_Ocp_test.state == 0) { 
+        gLight_Stu.members.forEach(light| postUpdate(light,0))
+    }
+end
+
+
+
+rule "Select Studio_Modes"
+when
+    Item Studio_mode received update
+then
+    if (Studio_mode.state == 1) {
+        sendCommand(Studio_Projector, OFF)
+        sendCommand(Studio_solarpanel_1,100)
+        sendCommand(Studio_solarpanel_2,100)
+        sendCommand(Studio_solarpanel_3,100)
+        sendCommand(Studio_Light_1, 50)
+        sendCommand(Studio_Light_2, 50)
+        sendCommand(Studio_Light_3, 50)
+    } else if (Studio_mode.state == 2) {
+        sendCommand(Studio_Projector, ON)
+        sendCommand(Studio_solarpanel_1,0)
+        sendCommand(Studio_solarpanel_2,30)
+        sendCommand(Studio_solarpanel_3,50)
+        sendCommand(Studio_Light_1, 0)
+        sendCommand(Studio_Light_2, 20)
+        sendCommand(Studio_Light_3, 40)
+        }
+end
+
+
+
+
+
+
+
+
+
+
+
+
+// vim: syntax=Xtend
